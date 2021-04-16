@@ -1,0 +1,11 @@
+.content {max-width:1200px; margin: 0 auto;;}
+
+.board {width:100%; table-layout: fixed;}
+.board th,
+.board td {border:1px solid #ccc; height:3em; padding:0.5em; text-align: center;}
+.board th {font-weight: bold; background:#f5f5f5;}
+.board td.title {text-align:left;}
+
+.btns {margin-top:1em; text-align: right;}
+.btns > a,
+.btns > button {display:inline-block; vertical-align:top; height:3em; line-height:3em; text-align:center; padding: 0 1em; min-width:5em; background:#333; color:#fff; font-size:0.9em; border:0;}
