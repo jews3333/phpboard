@@ -1,11 +1,16 @@
 .content {max-width:1200px; margin: 0 auto;;}
 
-.board {width:100%; table-layout: fixed;}
-.board th,
-.board td {border:1px solid #ccc; height:3em; padding:0.5em; text-align: center;}
-.board th {font-weight: bold; background:#f5f5f5;}
-.board td.title {text-align:left;}
+table[class^=board-] {width:100%; table-layout: fixed;}
+table[class^=board-] th,
+table[class^=board-] td {border:1px solid #ccc; height:3em; padding:0.5em; text-align: center;}
+table[class^=board-] th {font-weight: bold; background:#f5f5f5;}
+table[class^=board-] td.title {text-align:left;}
+
+table.board-view td {text-align: left;}
 
 .btns {margin-top:1em; text-align: right;}
 .btns > a,
 .btns > button {display:inline-block; vertical-align:top; height:3em; line-height:3em; text-align:center; padding: 0 1em; min-width:5em; background:#333; color:#fff; font-size:0.9em; border:0;}
+
+#passwordCheckPopup {position:fixed; top:50%; left:50%; max-width:500px; width:100%; background:#f5f5f5; padding:3em; z-index: 10; transform: translate(-50%,-50%); border:1px solid #ccc; display:none;}
+#passwordCheckPopup button {display:block; width:100%; text-align:center; color:#fff; background:#333; padding:0.5em; margin-top:5px;}

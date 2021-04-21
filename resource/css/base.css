@@ -4,6 +4,8 @@ a {color:inherit; text-decoration: none;}
 ul, li, ol {list-style: none;}
 img {max-width:100%; vertical-align: top;}
 table {border-spacing: 0; border-collapse: collapse;}
-input {height:2.5em; padding:0 1em; border:1px solid #ccc;}
+input {height:2.5em; padding:0 1em; border:1px solid #ccc; vertical-align: middle;}
 input.text {width:100%;}
+label {vertical-align: middle; cursor: pointer;}
+button {background: none; border:0; border-radius: 0; color:#333; font-size: 1rem; font-family: initial; cursor: pointer;}
 textarea {width:100%; resize: none; min-height:20em; border:1px solid #ccc; padding: 1em;}

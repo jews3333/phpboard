@@ -2,8 +2,41 @@
 
 <? include $_SERVER['DOCUMENT_ROOT']."/head.php" ?>
 
+    <script>
+        function passwordPopupHandler(no){
+            var popup = document.getElementById("passwordCheckPopup");
+            popup.style.display = "block";
+
+            var submit = popup.querySelector("button[type='submit']");
+            
+            submit.addEventListener("click", function(){
+                var password = popup.querySelector("#password").value;
+                $.ajax({
+                    url: '/page/board/view_lock.php',
+                    data: {
+                        no: no,
+                        password: password
+                    },
+                    type: 'POST',
+                    dataType: 'json',
+                    success: function(result){
+                        if(result.check){
+                            location.href = "/page/board/view.php?no="+no;
+                        } else {
+                            alert("패스트워 틀림");
+                        }
+                    },
+                    error: function(error){
+                        console.log(error);
+                    }
+                });
+            });
+            
+        }
+    </script>
+
     <div class="content">
-        <table class="board">
+        <table class="board-list">
             <caption></caption>
             <colgroup>
                 <col style="width:10;"/>
@@ -28,7 +61,13 @@
                 ?>
                 <tr>
                     <td><? echo $board["NO"] ?></td>
-                    <td class="title"><a href=""><? echo $board["SJ"] ?></a></td>
+                    <td class="title">
+                        <? if($board["LOCK_YN"] == "N"){ ?>
+                            <a href="/page/board/view.php?no=<? echo $board["NO"] ?>"><? echo $board["SJ"] ?></a>
+                        <? } else { ?>
+                            <a href="javascript:passwordPopupHandler(<? echo $board["NO"] ?>);"><? echo $board["SJ"] ?></a>
+                        <? } ?>
+                    </td>
                     <td><? echo $board["CREATE_DATE"] ?></td>
                 </tr>
                 <? } ?>
@@ -37,6 +76,11 @@
         <div class="btns">
             <a href="/page/board/write.php">글작성</a>
         </div>
+    </div>
+
+    <div id="passwordCheckPopup">
+        <input type="password" id="password" name="password" class="text"/>
+        <button type="submit">입력</a>
     </div>
 
     <!-- Google 번역 -->

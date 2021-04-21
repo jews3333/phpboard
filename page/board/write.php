@@ -1,16 +1,13 @@
-<? include $_SERVER['DOCUMENT_ROOT']."/db.php"; ?>
-
 <? include $_SERVER['DOCUMENT_ROOT']."/head.php" ?>
 
     <div class="content">
         <form action="action.php" method="post">
-            <table class="board">
+            <table class="board-form">
                 <caption></caption>
                 <colgroup>
                     <col style="width:10%;"/>
                     <col />
                 </colgroup>
-                <thead>
                 <tbody>
                     <tr>
                         <th>제목</th>
@@ -23,6 +20,14 @@
                     <tr>
                         <th>내용</th>
                         <td><textarea id="cn" name="cn"></textarea></td>
+                    </tr>
+                    <tr>
+                        <th>패스워드</th>
+                        <td><input type="password" id="password" name="password" class="text"/></td>
+                    </tr>
+                    <tr>
+                        <th>잠금</th>
+                        <td><input type="checkbox" id="lock" name="lock" value="Y"/><label for="lock">비공개</label></td> 
                     </tr>
                 <tbody>
             </table>
