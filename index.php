@@ -8,7 +8,6 @@
             popup.style.display = "block";
 
             var submit = popup.querySelector("button[type='submit']");
-            
             submit.addEventListener("click", function(){
                 var password = popup.querySelector("#password").value;
                 $.ajax({
@@ -52,8 +51,32 @@
             </thead>
             <tbody>
                 <?
-                    $sql = mq("select * from ts_board order by NO desc");
-                    while($board = $sql->fetch_array()){
+                    if(isset($_GET['page'])){
+                        $page = $_GET['page'];
+                    } else {
+                        $page = 1;
+                    }
+                    $sql = mq("select * from ts_board");
+
+                    $row_num = mysqli_num_rows($sql);
+                    $list = 5;
+                    $block_count = 5;
+
+                    $block_num = ceil($page/$block_count);
+                    $block_start = (($block_num - 1) * $block_count) + 1;
+                    $block_end = $block_start + $block_count - 1;
+
+                    $total_page = ceil($row_num/$list);
+                    
+                    if($block_end > $total_page){
+                        $block_end = $total_page;
+                    }
+                    $total_block = ceil($total_page/$block_count);
+                    $start_num = ($page - 1) * $list;
+
+                    $sql2 = mq("select * from ts_board order by NO desc limit $start_num, $list");
+
+                    while($board = $sql2->fetch_array()){
                         $title = $board["SJ"];
                         if(strlen($title)>30){
                             $title = str_replace($board["SJ"],mb_substr($board["SJ"],0,30,"utf-8")."...",$board["SJ"]);
@@ -62,17 +85,66 @@
                 <tr>
                     <td><? echo $board["NO"] ?></td>
                     <td class="title">
-                        <? if($board["LOCK_YN"] == "N"){ ?>
-                            <a href="/page/board/view.php?no=<? echo $board["NO"] ?>"><? echo $board["SJ"] ?></a>
-                        <? } else { ?>
+                        <? if($board["LOCK_YN"] == "N"){
+                            
+                            $date = date('Y-m-d', strtotime($board['CREATE_DATE']));
+                            $now = date('Y-m-d');  
+                            $new = "";  
+
+                            if($date == $now){
+                                $new = "<span>NEW</span>";
+                            }
+                        ?>
+                            <a href="/page/board/view.php?no=<? echo $board["NO"] ?>"><? echo $new ?><? echo $board["SJ"] ?></a>
+                        <? } else { 
+                        ?>
                             <a href="javascript:passwordPopupHandler(<? echo $board["NO"] ?>);"><? echo $board["SJ"] ?></a>
                         <? } ?>
                     </td>
-                    <td><? echo $board["CREATE_DATE"] ?></td>
+                    <td><? echo date('Y-m-d', strtotime($board['CREATE_DATE'])) ?></td>
                 </tr>
                 <? } ?>
             <tbody>
         </table>
+
+        <div id="pagination">
+            <?
+                if($page <= 1){
+                    echo "<a href='#none'>처음</a>";
+                } else {
+                    echo "<a href='?page=1'>처음</a>";
+                }
+
+                if($page <= 1){
+
+                } else {
+                    $prev = $page-1;
+                    echo "<a href='?page=$prev'>이전</a>";
+                }
+
+                for($i=$block_start; $i<=$block_end; $i++){
+                    if($page == $i){
+                        echo "<a href='#none'>$i</a>";
+                    } else {
+                        echo "<a href='?page=$i'>$i</a>";
+                    }
+                }
+
+                if($block_num >= $total_block){
+
+                } else {
+                    $next = $page + 1;
+                    echo "<a href='?page=$next'>다음</a>";
+                }
+
+                if($page >= $total_page){
+                    echo "<a href='#none'>마지막</a>";
+                } else {
+                    echo "<a href='?page=$total_page'>마지막</a>";
+                }
+            ?>
+        </div>
+
         <div class="btns">
             <a href="/page/board/write.php">글작성</a>
         </div>

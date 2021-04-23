@@ -1,7 +1,7 @@
 <? include $_SERVER['DOCUMENT_ROOT']."/head.php" ?>
 
     <div class="content">
-        <form action="action.php" method="post">
+        <form action="action.php" method="post" enctype="multipart/form-data">
             <table class="board-form">
                 <caption></caption>
                 <colgroup>
@@ -28,6 +28,10 @@
                     <tr>
                         <th>잠금</th>
                         <td><input type="checkbox" id="lock" name="lock" value="Y"/><label for="lock">비공개</label></td> 
+                    </tr>
+                    <tr>
+                        <th>첨부파일</th>
+                        <td><input type="file" id="file" name="file"/></td> 
                     </tr>
                 <tbody>
             </table>

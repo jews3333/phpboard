@@ -42,6 +42,10 @@
                 <th>내용</th>
                 <td colspan="5"><? echo nl2br("$board[CN]"); ?></td>
             </tr>
+            <tr>
+                <th>첨부파일</th>
+                <td colspan="5"><a href="../../upload/<?php echo $board['FILE'];?>" download title="다운로드 받기"><?php echo $board['FILE']; ?></td>
+            </tr>
         <tbody>
     </table>
     <div class="btns">
