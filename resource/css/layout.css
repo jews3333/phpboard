@@ -6,6 +6,7 @@ table[class^=board-] td {border-bottom:1px solid #ccc; height:3em; padding:0.5em
 table[class^=board-] th {background:#333; color:#fff; font-weight: normal;}
 table[class^=board-] td.title {text-align:left;}
 table[class^=board-] td.title span {display:inline-block; vertical-align: middle; background:rgb(255, 115, 0); color:#fff; font-size:0.8em; margin-right:0.5em; padding:0.25em 0.5em;}
+table[class^=board-] td input.text {width:100%;}
 
 table.board-view td {text-align: left;}
 
@@ -15,3 +16,20 @@ table.board-view td {text-align: left;}
 
 #passwordCheckPopup {position:fixed; top:50%; left:50%; max-width:500px; width:100%; background:#fff; padding:3em; z-index: 10; transform: translate(-50%,-50%); border:1px solid #ccc; display:none;}
 #passwordCheckPopup button {display:block; width:100%; text-align:center; color:#fff; background:#333; padding:0.5em; margin-top:5px;}
+
+#pagination {text-align:center; margin:2em 0;}
+#pagination > a {display:inline-block; position:relative; white-space: nowrap; min-width:2em; height:2em; line-height:2em; font-size:0.9em; color:#777; margin:0 0.25em; padding:0 0.25em;}
+#pagination > a:after {content:""; position:absolute; top:0; left:0; right:0; bottom:0; border:1px solid #ccc;}
+#pagination > .active {font-weight:bold; color:#333;}
+#pagination > .active:after {border:2px solid #333;}
+
+#board-search {margin-bottom:2em; border-top:1px solid #ccc;}
+#board-search .row {width:100%; display:table; border-bottom:1px solid #ccc;}
+#board-search .cell {display:table-cell; vertical-align: middle;}
+#board-search .cell dt,
+#board-search .cell dd {display:table-cell; vertical-align: middle; padding: 0.25em;}
+#board-search .cell dt {background:#333; color:#fff; min-width:100px; text-align: center;}
+#board-search button {background:#eee; font-size:0.9em; height:2.5em; vertical-align: middle; padding:0 1em; font-weight:bold; border:1px solid #aaa;}
+
+#search-text {margin-bottom: 1em;}
+#search-text > p {font-size:1.1em;}

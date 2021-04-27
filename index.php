@@ -34,7 +34,47 @@
         }
     </script>
 
+    <?
+        if(isset($_GET['catgo'])){
+            $catagory = $_GET['catgo'];
+        } else {
+            $catagory = "SJ";
+        }
+
+        if(isset($_GET['search'])){
+            $search = $_GET['search'];
+        }
+        
+    ?>
+
     <div class="content">
+        <div id="board-search">
+            <form action="./" method="get">
+                <div class="row">
+                    <dl class="cell">
+                        <dt>검색</dt>
+                        <dd>
+                            <select name="catgo">
+                                <option value="SJ" <? if($catagory == "SJ"){ ?>selected<? } ?>>제목</option>
+                                <option value="WRITER" <? if($catagory == "WRITER"){ ?>selected<? } ?>>글쓴이</option>
+                                <option value="CN" <? if($catagory == "CN"){ ?>selected<? } ?>>내용</option>
+                            </select>
+                            <input type="text" class="text" name="search" require="required"/>
+                            <button>검색</button>
+                        </dd>
+                    </dl>
+                </div>
+            </form>
+        </div>
+        <?
+            if(isset($_GET['search'])){
+        ?>
+        <div id="search-text">
+            <p>'<? echo $search ?>' 검색 결과</p>
+        </div>
+        <?
+            }
+        ?>
         <table class="board-list">
             <caption></caption>
             <colgroup>
@@ -56,7 +96,13 @@
                     } else {
                         $page = 1;
                     }
-                    $sql = mq("select * from ts_board");
+
+                    if(isset($_GET['search'])){
+                        $sql = mq("select * from ts_board where $catagory like '%$search%'");
+                    } else {
+                        $sql = mq("select * from ts_board");
+                    }
+                    
 
                     $row_num = mysqli_num_rows($sql);
                     $list = 5;
@@ -74,7 +120,11 @@
                     $total_block = ceil($total_page/$block_count);
                     $start_num = ($page - 1) * $list;
 
-                    $sql2 = mq("select * from ts_board order by NO desc limit $start_num, $list");
+                    if(isset($_GET['search'])){
+                        $sql2 = mq("select * from ts_board where $catagory like '%$search%' order by NO desc limit $start_num, $list");
+                    } else {
+                        $sql2 = mq("select * from ts_board order by NO desc limit $start_num, $list");
+                    }
 
                     while($board = $sql2->fetch_array()){
                         $title = $board["SJ"];
@@ -110,21 +160,21 @@
         <div id="pagination">
             <?
                 if($page <= 1){
-                    echo "<a href='#none'>처음</a>";
+                    echo "<a href='#none'>&lt;&lt;</a>";
                 } else {
-                    echo "<a href='?page=1'>처음</a>";
+                    echo "<a href='?page=1'>&lt;&lt;</a>";
                 }
 
                 if($page <= 1){
 
                 } else {
                     $prev = $page-1;
-                    echo "<a href='?page=$prev'>이전</a>";
+                    echo "<a href='?page=$prev'>&lt;</a>";
                 }
 
                 for($i=$block_start; $i<=$block_end; $i++){
                     if($page == $i){
-                        echo "<a href='#none'>$i</a>";
+                        echo "<a href='#none' class='active'>$i</a>";
                     } else {
                         echo "<a href='?page=$i'>$i</a>";
                     }
@@ -134,13 +184,13 @@
 
                 } else {
                     $next = $page + 1;
-                    echo "<a href='?page=$next'>다음</a>";
+                    echo "<a href='?page=$next'>&gt;</a>";
                 }
 
                 if($page >= $total_page){
-                    echo "<a href='#none'>마지막</a>";
+                    echo "<a href='#none'>&gt;&gt;</a>";
                 } else {
-                    echo "<a href='?page=$total_page'>마지막</a>";
+                    echo "<a href='?page=$total_page'>&gt;&gt;</a>";
                 }
             ?>
         </div>
