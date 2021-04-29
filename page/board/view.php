@@ -1,6 +1,7 @@
-<?
-    include $_SERVER['DOCUMENT_ROOT']."/db.php";
 
+<? include $_SERVER['DOCUMENT_ROOT']."/head.php" ?>
+
+<?
     $no = $_GET['no'];
 
     $hit = mysqli_fetch_array(mq("select * from ts_board where NO='".$no."'"));
@@ -10,8 +11,6 @@
     $sql = mq("select * from ts_board where NO='".$no."'");
     $board = $sql -> fetch_array();
 ?>
-
-<? include $_SERVER['DOCUMENT_ROOT']."/head.php" ?>
 
 <div class="content">
     <table class="board-view">

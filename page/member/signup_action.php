@@ -12,6 +12,8 @@
     $cnt = $sql1->fetch_array();
 
     if($cnt == 0){
+        session_start();
+        if($_SESSION['captcha'] == $_POST['captcha']){
         $sql2 = mq("insert into ts_user (id,password,name,address,gender,email) values('".$id."','".$password."','".$name."','".$address."','".$gender."','".$email."')");
         ?>
             <script>
@@ -19,6 +21,14 @@
                 location.href = "/";
             </script>
         <?
+        } else {
+        ?>
+            <script>
+                alert('자동가입방지문구가 일치하지 않습니다.');
+                history.back();
+            </script>
+        <?
+        }
     } else {
         ?>
             <script>

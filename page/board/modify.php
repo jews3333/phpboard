@@ -1,12 +1,10 @@
-<?
-    include $_SERVER['DOCUMENT_ROOT']."/db.php";
+<? include $_SERVER['DOCUMENT_ROOT']."/head.php" ?>
 
+<?
     $no = $_GET['no'];
     $sql = mq("select * from ts_board where NO='".$no."'");
     $board = $sql -> fetch_array();
 ?>
-
-<? include $_SERVER['DOCUMENT_ROOT']."/head.php" ?>
 
     <div class="content">
         <form action="modify_action.php?no=<? echo $no; ?>" method="post">

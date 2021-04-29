@@ -1,3 +1,7 @@
+<?
+    include $_SERVER['DOCUMENT_ROOT']."/db.php";
+    session_start();
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -14,3 +18,16 @@
 
     </head>
     <body>
+        <?
+            if(isset($_SESSION['id'])){
+                ?>
+                <p><? echo $_SESSION['id'] ?>님 로그인 상태입니다. <a href="/page/member/signout.php">로그아웃</a></p>
+                <?
+            } else {
+                ?>
+                <a href="/page/member/signin.php">로그인</a>
+                <a href="/page/member/signup.php">회원가입</a>
+                <?
+            }
+        ?>
+        

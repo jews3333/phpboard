@@ -5,6 +5,10 @@
         var overlap_check = false;
 
         function overlapCheckHandler(){
+            if(signForm.id.value == ""){
+                alert("아이디를 입력하세요");
+                return false;
+            }
             $.ajax({
                 url:"./overlap_check.php",
                 type:"post",
@@ -21,6 +25,10 @@
                     }
                 }
             });
+        }
+
+        function refreshCaptchaHandler(){
+            document.getElementById("captcha").src = "./captcha.php?waste="+Math.random();
         }
 
         document.addEventListener("DOMContentLoaded", function(){
@@ -73,6 +81,14 @@
                             <input type="text" name="email1" class="text"/>
                             @
                             <input type="text" name="email2" class="text"/>
+                        </td> 
+                    </tr>
+                    <tr>
+                        <th>자동가입방지</th>
+                        <td>
+                            <img src="./captcha.php" alt="" id="captcha">
+                            <input type="text" name="captcha" class="text"/>
+                            <a href="javascript:refreshCaptchaHandler();">변경</a>
                         </td> 
                     </tr>
                 <tbody>

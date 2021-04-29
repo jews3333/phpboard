@@ -6,12 +6,10 @@
     $cnt = $sql1->fetch_array();
 
     if($cnt == 0){
-        ?>
-        OK
-        <?
+        $chk = "OK";
     } else {
-        ?>
-        ERROR
-        <?
+        $chk = "ERROR";
     }
+
+    echo $chk;
 ?>
