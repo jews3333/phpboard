@@ -1,3 +1,11 @@
+[class*='-inner'] {max-width:1200px; margin:0 auto; position:relative;}
+[class*='-inner']:after {content:""; display:block; clear:both;}
+
+#header {border-bottom:1px solid #ccc;}
+#header p {position:absolute; top:50%; left:1em; transform: translateY(-50%);}
+#header .header-btns {float:right;}
+#header .header-btns a {display:inline-block; vertical-align: middle; padding:1em; white-space: nowrap;}
+
 .content {max-width:1200px; margin: 0 auto; padding: 3em 1em;}
 
 table[class^=board-] {width:100%; table-layout: fixed; border-top:3px solid #333;}

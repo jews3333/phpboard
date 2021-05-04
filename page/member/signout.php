@@ -1,6 +1,8 @@
 <?
     include $_SERVER['DOCUMENT_ROOT']."/db.php";
+    
     session_start();
+    session_unset();
     session_destroy();
 ?>
 

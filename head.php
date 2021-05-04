@@ -1,5 +1,7 @@
-<?
+<? 
     include $_SERVER['DOCUMENT_ROOT']."/db.php";
+
+    session_save_path(session_save_path());
     session_start();
 ?>
 <!DOCTYPE html>
@@ -18,16 +20,31 @@
 
     </head>
     <body>
-        <?
-            if(isset($_SESSION['id'])){
-                ?>
-                <p><? echo $_SESSION['id'] ?>님 로그인 상태입니다. <a href="/page/member/signout.php">로그아웃</a></p>
-                <?
-            } else {
-                ?>
-                <a href="/page/member/signin.php">로그인</a>
-                <a href="/page/member/signup.php">회원가입</a>
-                <?
-            }
-        ?>
+        <header id="header">
+            <div class="header-inner">
+            <?
+                if(isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 600)){
+                        session_unset();
+                        session_destroy();
+                }
+                $_SESSION['LAST_ACTIVITY'] = time();
+
+                if(isset($_SESSION['ID'])){
+                    ?>
+                    <p><? echo $_SESSION['ID'] ?>님 로그인 상태입니다.</p>
+                    <div class="header-btns">
+                        <a href="/page/member/signout.php">로그아웃</a>
+                    </div>
+                    <?
+                } else {
+                    ?>
+                    <div class="header-btns">
+                        <a href="/page/member/signin.php">로그인</a>
+                        <a href="/page/member/signup.php">회원가입</a>
+                    </div>
+                    <?
+                }
+            ?>
+            </div>
+        </header>
         

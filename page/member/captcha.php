@@ -10,7 +10,7 @@
         $captcha .= $pattern[rand(0, $len)];
     }
 
-    $_SESSION['captcha'] = $captcha;
+    $_SESSION['CAPTCHA'] = $captcha;
 
     $img = imagecreatetruecolor(80, 30);
     imagefilledrectangle($img, 0, 0, 100, 100, 0xc80000);

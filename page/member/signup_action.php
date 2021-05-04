@@ -13,7 +13,7 @@
 
     if($cnt == 0){
         session_start();
-        if($_SESSION['captcha'] == $_POST['captcha']){
+        if($_SESSION['CAPTCHA'] == $_POST['captcha']){
         $sql2 = mq("insert into ts_user (id,password,name,address,gender,email) values('".$id."','".$password."','".$name."','".$address."','".$gender."','".$email."')");
         ?>
             <script>

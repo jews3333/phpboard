@@ -16,10 +16,11 @@
         $hash_password = $member['password'];
 
         if(password_verify($password, $hash_password)){
+            
             session_start();
             
-            $_SESSION['id'] = $member['id'];
-            $_SESSION['password'] = $member['password'];
+            $_SESSION['ID'] = $member['id'];
+            $_SESSION['PASSWORD'] = $member['password'];
             ?>
                 <script>
                     alert("로그인되었습니다.");
